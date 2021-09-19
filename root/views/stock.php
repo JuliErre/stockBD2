@@ -29,7 +29,7 @@
                 <li><a href="stock.php">Stock</a></li>
                 <li><a href="venta.php">Venta</a></li>
                 <li><a href="ingreso.php">Ingresar producto</a></li>
-                <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="proveedores.php">Proveedore</a></li>
 
         </nav>
     </header>
