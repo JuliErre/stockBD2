@@ -12,8 +12,10 @@
     <title>GamerBag</title>
     <title>Home</title>
 </head>
-
+<div>
 <a href="index.html" class="home">Home</a>
+</div>
+<body>
 <?php
 include("conexion.php");
 $con = conectar();
@@ -83,17 +85,22 @@ if (isset($_POST['Enviar'])) {
 
 if (isset($_POST['Mostrar'])) {
     $id = trim($_POST['id']);
+    $max = mysqli_query($con,"SELECT MAX(nroVenta) AS maxi FROM ventas");
+    $maxi = mysqli_fetch_array($max);
+    $last = $maxi["maxi"];
+    $last50 = (int)$last - 50;
 
 
-    $res = mysqli_query($con, "SELECT v.nroVenta, v.ingreso, v.fecha,  p.modelo, m.desMarca, c.desCategoria FROM precioproducto AS p INNER JOIN ventas AS v ON (p.codProducto=v.codProducto) INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca=m.codMarca) ORDER BY v.nroVenta DESC ");
 
-
+    $res = mysqli_query($con, "SELECT v.nroVenta, v.ingreso, v.fecha,  p.modelo, m.desMarca, c.desCategoria FROM precioproducto AS p INNER JOIN ventas AS v ON (p.codProducto=v.codProducto) INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca=m.codMarca) WHERE v.nroVenta >= '$last50' ORDER BY v.nroVenta DESC ");
+    
 
     ?>
 
 
 
     <h1>ventas</h1>
+    <h3>Ultimas 50 ventas</h3>
     <form action="">
         <table border="1" cellpadding="10" id="table">
             <tr>
@@ -121,6 +128,26 @@ if (isset($_POST['Mostrar'])) {
                 </tr>
     </form>
 
+    <style>
+
+        body{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+            
+        form{
+            justify-self: center;
+            align-self: center;
+        }
+
+        div{
+            display: flex;
+        }
+
+    </style>
+    
+</body>
 
 <?php
             }
