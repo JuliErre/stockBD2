@@ -59,7 +59,7 @@ $res = mysqli_query($con,"SELECT talle, codProducto, precio, desCategoria, desMa
             <th><?php echo $fila["precio"] ?></th>
             <th><select name="op" id="op">
                 <option value="precio">Precio</option>
-                <option value="talle">Talle</option>S
+                <option value="talle">Talle</option>
                 </select></th>
             <th><input type="text" name="valor" placeholder="Ingrese Valor" size="10"></th>
             <th><input type="submit" value="Editar" name="editar"></th>

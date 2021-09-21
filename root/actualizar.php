@@ -35,8 +35,10 @@ if(isset($_POST['editar'])) {
 
 
 if($resultado){
+    
+    
     ?>
-    <h3 class="ok">Se ha modificado correctamente</h3>
+    <h3 class="ok">Se ha modificado correctamente el producto  ID- <?php echo $id ?></h3>
     <?php
     }
 
@@ -53,7 +55,7 @@ if(isset($_POST['eliminar'])) {
     $marca = trim($_POST['marca']);
     $cat = trim($_POST['cat']);
 
-    $consulta = "DELETE FROM precioproducto  WHERE codProducto = '$id' and codMarca = '$marca' and codCategoria = '$cat' ";
+    $consulta = "UPDATE precioproducto SET estado = 'B' WHERE codProducto = '$id' AND codMarca = '$marca'  AND codCategoria = '$cat' ";
     $resultado = mysqli_query($con,$consulta);
 
 

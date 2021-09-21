@@ -42,7 +42,7 @@ if (isset($_POST['Enviar'])) {
     $ingreso = $pres['precio'];
 
 
-    $eliminarCons = "UPDATE precioproducto SET estado = 'B' WHERE codProducto = '$id' AND codMarca = '$marca'  AND codCategoria = '$cat' ";
+    $eliminarCons = "UPDATE precioproducto SET estado = 'B' WHERE codProducto = '$id' ";
     $ventaCons = "INSERT INTO ventas(dniCliente, nroVenta, Ingreso, fecha, codProducto) VALUES ('$dni','$nroVenta','$ingreso','$date', '$id')";
 
 
@@ -52,7 +52,7 @@ if (isset($_POST['Enviar'])) {
 
     if ($venta) {
 ?>
-        <h3 class="ok">Venta ingresada correctamente</h3>
+        <h3 class="ok">Venta NRO: <?php echo $nroVenta?> con un valor de $<?php echo $ingreso?> ingresada correctamente</h3>
     <?php
     } else {
     ?>
@@ -64,7 +64,7 @@ if (isset($_POST['Enviar'])) {
 
     if ($eliminar) {
     ?>
-        <h3 class="ok">Producto eliminado correctamente</h3>
+        <h3 class="ok">Producto  ID- <?php echo $id?> eliminado correctamente</h3>
     <?php
     } else {
     ?>
@@ -72,15 +72,6 @@ if (isset($_POST['Enviar'])) {
     <?php
     }
 
-    if ($precio) {
-    ?>
-        <h3 class="ok">Precio del producto obtenido correctamente</h3>
-    <?php
-    } else {
-    ?>
-        <h3 class="error">ERROR al obtener precio del producto</h3>
-    <?php
-    }
 }
 
 if (isset($_POST['Mostrar'])) {
