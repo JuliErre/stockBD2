@@ -21,11 +21,8 @@ include("conexion.php");
 $con = conectar();
 
 if (isset($_POST['Enviar'])) {
-    $marca = trim($_POST['marca']);
-    $cat = trim($_POST['cat']);
     $id = trim($_POST['id']);
-    $nombre = trim($_POST['nombre']);
-    $dni = trim($_POST['dni']);
+    $cliente = trim($_POST['nroCliente']);
     $date = trim($_POST['date']);
 
     $lastConsulta = "SELECT lastVenta FROM contador ";
@@ -43,7 +40,7 @@ if (isset($_POST['Enviar'])) {
 
 
     $eliminarCons = "UPDATE precioproducto SET estado = 'B' WHERE codProducto = '$id' ";
-    $ventaCons = "INSERT INTO ventas(dniCliente, nroVenta, Ingreso, fecha, codProducto) VALUES ('$dni','$nroVenta','$ingreso','$date', '$id')";
+    $ventaCons = "INSERT INTO ventas(nroCliente, nroVenta, Ingreso, fecha, codProducto) VALUES ('$cliente','$nroVenta','$ingreso','$date', '$id')";
 
 
     $venta = mysqli_query($con, $ventaCons);

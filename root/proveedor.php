@@ -28,7 +28,7 @@ if(isset($_POST['enviar'])) {
     $res = mysqli_query($con,$maximo);
     $maxi = mysqli_fetch_array($res);
     $max = $maxi['maximo'];
-    $max = (int)$max + 1;
+    $max = $max + 1;
     
 
     $consulta = "INSERT INTO comprasproveedor(codProveedor, fecha, egresos, nroCompraProv) VALUES ('$prov','$fecha','$egreso', '$max')";
@@ -37,13 +37,13 @@ if(isset($_POST['enviar'])) {
 
 if($resultado){
     ?>
-    <h3 class="ok">Compra por <?php echo $egreso ?> al proveedor nro <?php echo $prov ?> </h3>
+    <h3 class="ok">Compra por $<?php echo $egreso ?> al proveedor nro <?php echo $prov ?> </h3>
     <?php
     }
 
     else{
         ?>
-        <h3 class="error">ERROR</h3>
+        <h3 class="error">ERROR <?php echo mysqli_error($con)?></h3>
         <?php
     }
 }

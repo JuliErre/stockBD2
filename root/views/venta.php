@@ -32,7 +32,7 @@
                 <li><a href="venta.php">Venta</a></li>
                 <li><a href="ingreso.php">Ingresar producto</a></li>
                 <li><a href="proveedores.php">Proveedores</a></li>
-               
+
             </ul>
         </nav>
 
@@ -41,65 +41,50 @@
     <section>
         <article>
             <h1>Venta</h1>
-            
+
             <form action="../addVenta.php" method="POST">
                 <div>
                     <label for="ingresarDate">Ingresa la fecha de hoy</label>
                     <input type="date" name="date">
                 </div>
-                <fieldset>
-                <legend>Seleccione la categoria del producto</legend>
-                    <select name="cat" id="cat">
-                    <?php
-                        while($fila = mysqli_fetch_array($cat)){
-
-                        $codCategoria = $fila['codCategoria'];
-                        $desCategoria = $fila['desCategoria'];
-                    
-                        echo "<option value=$codCategoria>$desCategoria</option>";
-                        
-                        }
-                    ?>
-
-                    </select>
-
-                </fieldset><br>    
-
-                <fieldset >
-                    <legend>Seleccione la marca del producto</legend>
-                    <select name="marca" id="marca">
-                    <?php
-                        while($fila = mysqli_fetch_array($marca)){
-
-                        $codMarca = $fila['codMarca'];
-                        $descMarca = $fila['desMarca'];
-                    
-                        echo "<option value=$codMarca>$descMarca</option>";
-                        
-                        }
-                    ?>
-                    
-                    </select>
-
-                    <input type="text"name="id" id="id" placeholder="Ingrese el codigo del producto" style="width:200px" size="40">
 
 
-                </fieldset><br>
+                <div id="inputs">
+                    <input type="text" name="id" id="id" placeholder="Ingrese el codigo del producto"
+                        style="width:200px" size="40">
+                        <input type="text" name="nroCliente" id="nroCliente" placeholder="Ingrese el numero de cliente">
+                </div>
 
-                
-                <input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre y apellido"><br><br>
-                <input type="text" name="dni" id="dni" placeholder="Ingrese DNI"><br><br>
-                <input type="submit" value="Enviar" name="Enviar"> 
-                <input type="reset" value="Resetear">
-                <input type="submit" value="Mostrar Ventas" name="Mostrar">
-
+                <div>
+                    <input type="submit" value="Enviar" name="Enviar">
+                    <input type="reset" value="Resetear">
+                    <input type="submit" value="Mostrar Ventas" name="Mostrar">
+                </div>
 
 
             </form>
         </article>
     </section>
 
+ <style>
+     form{
+         display:flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+     }
+     div{
+         margin: 20px;
+     }
+     #inputs{
+         display: flex;
+         flex-direction: column;
+     }
 
+     #inputs input{
+         margin: 10px;
+     }
+ </style>
 </body>
 
 </html>
