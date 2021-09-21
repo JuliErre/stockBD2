@@ -21,7 +21,6 @@ $con = conectar();
 
 if(isset($_POST['enviar'])) {
     $prov = trim($_POST['prov']);
-    $mes = trim($_POST['mes']);
     $egreso = trim($_POST['dinero']);
     $fecha = trim($_POST['year']);
 
