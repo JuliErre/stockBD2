@@ -49,7 +49,7 @@ if (isset($_POST['Agregar'])) {
 
         if ($resultado) {
         ?>
-            <h3 class="ok">Datos ingresados correctamente</h3>
+            <h3 class="ok"> Producto con ID <?php echo $id ?> CATEGORIA: <?php echo $cat ?> MARCA: <?php echo $marca ?> ingresados correctamente</h3>
         <?php
         } else {
         ?>
