@@ -21,6 +21,7 @@
             <li><a href="venta.php">Venta</a></li>
             <li><a href="ingreso.php">Ingresar producto</a></li>
             <li><a href="proveedores.php">Proveedores</a></li>
+            <li><a href="showVentas.php">Mostrar Ventas</a></li>
 
         </ul>
     </nav>
@@ -76,7 +77,7 @@
 
                 </fieldset><br>
 
-                <input type="text" name="id" id="id" placeholder="Ingrese el codigo del producto" style="width:200px" size="40"><br><br>
+                
                 <input type="text" name="modelo" id="modelo" placeholder="Ingrese modelo del producto" style="width:200px" size="40"><br><br>
                 <input type="text" name="size" id="size" placeholder="Ingrese el talle producto" style="width:200px" size="40"><br><br>
                 <input type="text" name="precio" id="precio" placeholder="Ingrese el precio del producto" style="width:200px" size="40"><br><br>

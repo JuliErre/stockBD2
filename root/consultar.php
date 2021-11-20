@@ -31,7 +31,7 @@ $res = mysqli_query($con,"SELECT talle, codProducto, precio, desCategoria, desMa
 <body>
 
     <h1>STOCK</h1>
-    <form action="actualizar.php" method="POST">
+
     <table border="1" cellpadding="10" id="table">
         <tr>
             <th>Marca</th>
@@ -42,32 +42,40 @@ $res = mysqli_query($con,"SELECT talle, codProducto, precio, desCategoria, desMa
             <th>Editar</th>
             <th>Dato</th>
         </tr>
-        <?php
+        <?php $contador = 1;
                     
             while($fila=mysqli_fetch_assoc($res)){ ?>
 
         <tr align="left">
+
+
+
+            <th><?php echo $fila['desMarca'] ?></th>
+            <th><?php echo $fila['desCategoria'] ?></th>
+            <th><?php echo $fila['talle'] ?></th>
+            <th><?php echo $fila['codProducto'] ?></th>
+            <th><?php echo $fila['precio'] ?></th>
             
-            <input type="hidden" name="id" value=<?php echo $fila["codProducto"]?> >
-            <input type="hidden" name="marca" value=<?php echo $fila["codMarca"]?>>            
-            <input type="hidden" name="cat" value=<?php echo $fila["codCategoria"]?>>
-            
-            <th><?php echo $fila["desMarca"] ?></th>
-            <th><?php echo $fila["desCategoria"] ?></th>   
-            <th><?php echo $fila["talle"] ?></th>
-            <th><?php echo $fila["codProducto"] ?></th>
-            <th><?php echo $fila["precio"] ?></th>
-            <th><select name="op" id="op">
-                <option value="precio">Precio</option>
-                <option value="talle">Talle</option>
-                </select></th>
+            <td>
+                <form action="actualizar.php" method="POST">
+                    <input type="hidden" name="id" value=<?php echo $fila["codProducto"]?>>
+                    <input type="hidden" name="marca" value=<?php echo $fila["codMarca"]?>>
+                    <input type="hidden" name="cat" value=<?php echo $fila["codCategoria"]?>>
+                    <select name="op" id="op">
+                    <option value="precio">Precio</option>
+                    <option value="talle">Talle</option>
+                </select>
+
             <th><input type="text" name="valor" placeholder="Ingrese Valor" size="10"></th>
             <th><input type="submit" value="Editar" name="editar"></th>
             <th><input type="submit" value="Eliminar" name="eliminar"></th>
-            
+            </form>
+            </td>
         </tr>
-        <?php
+
+        <?php $contador = $contador + 1; 
         }
          ?>
-        </form>
+    </table>
+
 </body>

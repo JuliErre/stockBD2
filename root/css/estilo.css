@@ -8,6 +8,7 @@ body {
 
 }
 
+
 nav {
     display: grid;
     grid-template-columns: 100%;
@@ -132,3 +133,5 @@ input[type=submit], [type=reset]{
     border: 0;
 
 }
+
+

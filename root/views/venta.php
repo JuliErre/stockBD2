@@ -32,6 +32,7 @@
                 <li><a href="venta.php">Venta</a></li>
                 <li><a href="ingreso.php">Ingresar producto</a></li>
                 <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="showVentas.php">Mostrar Ventas</a></li>
 
             </ul>
         </nav>
@@ -42,49 +43,141 @@
         <article>
             <h1>Venta</h1>
 
-            <form action="../addVenta.php" method="POST">
-                <div>
+            <form action="venta.php" method="POST">
+
+            <div>
                     <label for="ingresarDate">Ingresa la fecha de hoy</label>
                     <input type="date" name="date">
                 </div>
 
 
                 <div id="inputs">
-                    <input type="text" name="id" id="id" placeholder="Ingrese el codigo del producto"
-                        style="width:200px" size="40">
-                        <input type="text" name="nroCliente" id="nroCliente" placeholder="Ingrese el numero de cliente">
+                    <input type="text" name="dniCliente" id="dniCliente" placeholder="Ingrese el DNI del cliente">
                 </div>
 
+                <fieldset>
+                    <legend>Seleccione la marca del producto</legend>
+                    <select name="marca" id="marca">
+                        <?php
+        while ($fila = mysqli_fetch_array($marca)) {
+
+            $codMarca = $fila['codMarca'];
+            $descMarca = $fila['desMarca'];
+
+            echo "<option value=$codMarca>$descMarca</option>";
+        }
+        ?>
+
+                    </select>
+
+
+                </fieldset><br>
+
+                <fieldset>
+
+                    <legend>Seleccione la categoria del producto</legend>
+                    <select name="cat" id="cat">
+                        <?php
+        while ($fila = mysqli_fetch_array($cat)) {
+
+            $codCategoria = $fila['codCategoria'];
+            $desCategoria = $fila['desCategoria'];
+
+            echo "<option value=$codCategoria>$desCategoria</option>";
+        }
+        ?>
+
+                    </select>
+
+
+
+                </fieldset><br>
+               
                 <div>
                     <input type="submit" value="Enviar" name="Enviar">
                     <input type="reset" value="Resetear">
-                    <input type="submit" value="Mostrar Ventas" name="Mostrar">
                 </div>
-
-
             </form>
+
+          
         </article>
     </section>
 
- <style>
-     form{
-         display:flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-     }
-     div{
-         margin: 20px;
-     }
-     #inputs{
-         display: flex;
-         flex-direction: column;
-     }
+    <div>
+        <?php
+        if (isset($_POST['Enviar'])) {
+        
+            $marca = trim($_POST['marca']);
+            $cat = trim($_POST['cat']);
+            $res = mysqli_query($con,"SELECT talle, codProducto, precio, desCategoria, desMarca, p.codMarca, p.codCategoria FROM precioproducto AS p INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca = m.codMarca) WHERE p.codMarca = '$marca' AND p.codCategoria = '$cat' AND p.estado <> 'B' ORDER BY p.talle ASC "); 
+            $cliente = trim($_POST['dniCliente']);
+            $date = trim($_POST['date']);
+ 
+ 
+ ?>
 
-     #inputs input{
-         margin: 10px;
-     }
- </style>
+    <table border="1" cellpadding="10" id="table">
+        <tr>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Talle</th>
+            <th>Codigo de producto</th>
+            <th>Precio</th>
+            
+        </tr>
+        <?php
+                    
+            while($fila=mysqli_fetch_assoc($res)){ ?>
+
+        <tr align="left">
+      
+            <th><?php echo $fila["desMarca"] ?></th>
+            <th><?php echo $fila["desCategoria"] ?></th>   
+            <th><?php echo $fila["talle"] ?></th>
+            <th><?php echo $fila["codProducto"] ?></th>
+            <th><?php echo $fila["precio"] ?></th>
+           
+        <td>
+        <form action="../addVenta.php" method="POST">
+            <input type="hidden" name="id" value=<?php echo $fila["codProducto"]?> >
+            <input type="hidden" name="marca" value=<?php echo $fila["codMarca"]?> >            
+            <input type="hidden" name="cat" value=<?php echo $fila["codCategoria"]?> >
+            <input type="hidden" name="date" value=<?php echo $date ?> >
+            <input type="hidden" name="dniCliente" value=<?php echo $cliente?> >
+            <input type="submit" value="Vender" name="Enviar">
+         </form>  
+         </td>  
+            
+        </tr>
+        <?php
+        }
+         ?>
+        
+    </div>
+<?php
+        }
+?>
+    <style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div {
+        margin: 20px;
+    }
+
+    #inputs {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #inputs input {
+        margin: 10px;
+    }
+    </style>
 </body>
 
 </html>
