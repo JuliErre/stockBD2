@@ -33,12 +33,15 @@ if(isset($_POST['editar'])) {
     $consulta = "UPDATE precioproducto SET $op = '$valor' WHERE codProducto = '$id' and codMarca = '$marca' and codCategoria = '$cat'";
     $resultado = mysqli_query($con,$consulta);
 
+    $res = mysqli_query($con,"SELECT desCategoria, desMarca, p.codMarca, p.codCategoria FROM precioproducto AS p INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca = m.codMarca) WHERE p.codMarca = '$marca' AND p.codCategoria = '$cat'");
+    $fila=mysqli_fetch_assoc($res);
+
 
 if($resultado){
     
     
     ?>
-    <h3 class="ok">Se ha modificado correctamente el producto  ID- <?php echo $id ?></h3>
+     <h3 class="ok"> <?php echo $fila["desMarca"] ?>  <?php echo $fila["desCategoria"] ?>  modificado correctamente a <?php echo $op," ", $valor ?>  </h3>
     <?php
     }
 
@@ -58,10 +61,11 @@ if(isset($_POST['eliminar'])) {
     $consulta = "UPDATE precioproducto SET estado = 'B' WHERE codProducto = '$id' AND codMarca = '$marca'  AND codCategoria = '$cat' ";
     $resultado = mysqli_query($con,$consulta);
 
-
+    $res = mysqli_query($con,"SELECT desCategoria, desMarca, p.codMarca, p.codCategoria FROM precioproducto AS p INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca = m.codMarca) WHERE p.codMarca = '$marca' AND p.codCategoria = '$cat'");
+    $fila=mysqli_fetch_assoc($res);
 if($resultado){
     ?>
-    <h3 class="ok">Se ha eliminado correctamente la fila</h3>
+    <h3 class="ok"><?php echo $fila["desMarca"] ?>  <?php echo $fila["desCategoria"] ?> Se ha eliminado correctamente </h3>
     <?php
     }
 

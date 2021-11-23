@@ -31,7 +31,6 @@
                 <li><a href="stock.php">Stock</a></li>
                 <li><a href="venta.php">Venta</a></li>
                 <li><a href="ingreso.php">Ingresar producto</a></li>
-                <li><a href="proveedores.php">Proveedores</a></li>
                 <li><a href="showVentas.php">Mostrar Ventas</a></li>
 
             </ul>
@@ -115,7 +114,6 @@
  
  
  ?>
-
     <table border="1" cellpadding="10" id="table">
         <tr>
             <th>Marca</th>
@@ -167,6 +165,15 @@
 
     div {
         margin: 20px;
+    }
+
+    div {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     #inputs {

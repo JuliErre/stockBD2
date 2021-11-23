@@ -1,5 +1,5 @@
 body {
-    font-size: 62.5%;
+
     font-family: 'Poppins', sans-serif;
     background: rgb(20, 18, 18);
     color: white;
@@ -91,7 +91,7 @@ h1{
     
 }
 
-form{
+table{
     font-size: 1.2rem;
     font-weight: 600;
     margin-top: 15px;

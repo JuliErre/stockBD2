@@ -26,6 +26,8 @@ if (isset($_POST['Enviar'])) {
     $id = trim($_POST['id']);
     $cliente = trim($_POST['dniCliente']);
     $date = trim($_POST['date']);
+    $marca = trim($_POST['marca']);
+    $cat = trim($_POST['cat']);
 
     $lastConsulta = "SELECT lastVenta FROM contador ";
     $last = mysqli_query($con, $lastConsulta);
@@ -48,10 +50,14 @@ if (isset($_POST['Enviar'])) {
     $venta = mysqli_query($con, $ventaCons);
     $eliminar = mysqli_query($con, $eliminarCons);
 
+    $res = mysqli_query($con,"SELECT desCategoria, desMarca, p.codMarca, p.codCategoria FROM precioproducto AS p INNER JOIN categoria AS c ON (p.codCategoria=c.codCategoria) INNER JOIN marca AS m ON (p.codMarca = m.codMarca) WHERE p.codMarca = '$marca' AND p.codCategoria = '$cat'");
+    $fila=mysqli_fetch_assoc($res);
+
 
     if ($venta) {
 ?>
     <h3 class="ok">Venta NRO: <?php echo $nroVenta?> con un valor de $<?php echo $ingreso?> ingresada correctamente</h3>
+    <h3> </h3>
     <?php
     } else {
     ?>
@@ -63,7 +69,7 @@ if (isset($_POST['Enviar'])) {
 
     if ($eliminar) {
     ?>
-    <h3 class="ok">Producto ID- <?php echo $id?> eliminado correctamente</h3>
+    <h3 class="ok"><?php echo $fila["desMarca"] ?>  <?php echo $fila["desCategoria"] ?> Se ha vendido correctamente </h3>
     <?php
     } else {
     ?>

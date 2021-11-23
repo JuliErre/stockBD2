@@ -25,7 +25,6 @@
                 <li><a href="stock.php">Stock</a></li>
                 <li><a href="venta.php">Venta</a></li>
                 <li><a href="ingreso.php">Ingresar producto</a></li>
-                <li><a href="proveedores.php">Proveedores</a></li>
                 <li><a href="showVentas.php">Mostrar Ventas</a></li>
 
             </ul>
@@ -79,8 +78,9 @@ $marca = mysqli_query($con, "SELECT codMarca, desMarca  FROM marca");
                     ?>
 
     </select>
-
+    <div>
     <input type="submit" value="filtrar" name="filtrar">
+     </div>
 
 </form>
 <?php
@@ -144,6 +144,7 @@ if (isset($_POST['filtrar'])) {
 
         div {
             display: flex;
+            margin-top: 15px;
         }
         </style>   
     </body>

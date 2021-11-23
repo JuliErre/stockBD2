@@ -31,51 +31,62 @@ $res = mysqli_query($con,"SELECT talle, codProducto, precio, desCategoria, desMa
 <body>
 
     <h1>STOCK</h1>
+    <div>
+        <table border="1" cellpadding="10" id="table">
+            <tr>
+                <th>Marca</th>
+                <th>Categoria</th>
+                <th>Talle</th>
+                <th>Codigo de producto</th>
+                <th>Precio</th>
+                <th>Editar</th>
+                <th>Dato</th>
+            </tr>
+            <?php $contador = 1;
+                        
+                while($fila=mysqli_fetch_assoc($res)){ ?>
 
-    <table border="1" cellpadding="10" id="table">
-        <tr>
-            <th>Marca</th>
-            <th>Categoria</th>
-            <th>Talle</th>
-            <th>Codigo de producto</th>
-            <th>Precio</th>
-            <th>Editar</th>
-            <th>Dato</th>
-        </tr>
-        <?php $contador = 1;
-                    
-            while($fila=mysqli_fetch_assoc($res)){ ?>
-
-        <tr align="left">
+            <tr align="left">
 
 
 
-            <th><?php echo $fila['desMarca'] ?></th>
-            <th><?php echo $fila['desCategoria'] ?></th>
-            <th><?php echo $fila['talle'] ?></th>
-            <th><?php echo $fila['codProducto'] ?></th>
-            <th><?php echo $fila['precio'] ?></th>
-            
-            <td>
-                <form action="actualizar.php" method="POST">
-                    <input type="hidden" name="id" value=<?php echo $fila["codProducto"]?>>
-                    <input type="hidden" name="marca" value=<?php echo $fila["codMarca"]?>>
-                    <input type="hidden" name="cat" value=<?php echo $fila["codCategoria"]?>>
-                    <select name="op" id="op">
-                    <option value="precio">Precio</option>
-                    <option value="talle">Talle</option>
-                </select>
+                <th><?php echo $fila['desMarca'] ?></th>
+                <th><?php echo $fila['desCategoria'] ?></th>
+                <th><?php echo $fila['talle'] ?></th>
+                <th><?php echo $fila['codProducto'] ?></th>
+                <th><?php echo $fila['precio'] ?></th>
 
-            <th><input type="text" name="valor" placeholder="Ingrese Valor" size="10"></th>
-            <th><input type="submit" value="Editar" name="editar"></th>
-            <th><input type="submit" value="Eliminar" name="eliminar"></th>
-            </form>
-            </td>
-        </tr>
+                <td>
+                    <form action="actualizar.php" method="POST">
+                        <input type="hidden" name="id" value=<?php echo $fila["codProducto"]?>>
+                        <input type="hidden" name="marca" value=<?php echo $fila["codMarca"]?>>
+                        <input type="hidden" name="cat" value=<?php echo $fila["codCategoria"]?>>
+                        <select name="op" id="op">
+                            <option value="precio">Precio</option>
+                            <option value="talle">Talle</option>
+                        </select>
 
-        <?php $contador = $contador + 1; 
-        }
-         ?>
-    </table>
+                <th><input type="text" name="valor" placeholder="Ingrese Valor" size="10"></th>
+                <th><input type="submit" value="Editar" name="editar"></th>
+                <th><input type="submit" value="Eliminar" name="eliminar"></th>
+                </form>
+                </td>
+            </tr>
+
+            <?php $contador = $contador + 1; 
+            }
+            ?>
+        </table>
+    </div>
+    <style>
+    div {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    </style>
 
 </body>
